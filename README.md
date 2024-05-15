@@ -24,7 +24,7 @@
   "savePath": "C:\\Users\\Administrator\\Desktop\\A",
   // "savePath": "/usr/local/torrent",
   // 新鲜时间（单位：秒，此处为两小时，两个小时内发布的免费种子，就下载，超过的就不下载，自行修改）
-  "freshTime": 1296000
+  "freshTime": 7200
 }
 ```
 
