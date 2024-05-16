@@ -67,7 +67,7 @@ async function main() {
   console.log("[4/5] 开始下载种子文件...");
 
   const allTask = freeRSSItems.map((item) =>
-    downloadTorrent(item.enclosure[0].$.url, item.guid[0]._)
+    downloadTorrent(item.enclosure[0].$.url)
   );
 
   const allResult = await Promise.all(allTask);
