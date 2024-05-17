@@ -1,29 +1,24 @@
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { join } from "path";
 import { downloadTorrent } from "./lib/downloadTorrent";
-import {
-  filterCategoriesListByDiscount,
-  getCategoriesList,
-} from "./lib/getCategoriesList";
 import { filterRSSListByTime, getRSSList } from "./lib/getRSSList";
 import { RSSItem } from "./types/RSS";
-import { CategoriesItem } from "./types/Categories";
 import { notDownLoaded } from "./lib/notDownLoaded";
 import { Config } from "./types/Config";
+import { getFreeId } from "./lib/getFreeId";
 
 const config = require("../config.json") as Config;
-const { rssURL, token, categories, savePath, freshTime } = config;
+const { rssURL, token, savePath, freshTime } = config;
 
 async function main() {
-  let freeList: CategoriesItem[];
   let rssItems: RSSItem[];
 
   try {
+    console.log("[1/5] 获取最近的新鲜RSS列表");
     const rssList = await getRSSList(rssURL);
     rssItems = filterRSSListByTime(rssList, freshTime * 1000);
 
-    // 打印出最近15天的RSS列表
-    console.log("[1/5] 最近的新鲜RSS列表");
+    // 打印出最近新鲜的RSS列表
     rssItems.forEach((item) => {
       console.log("id: %s title: %s", item.guid[0]._, item.title[0]);
     });
@@ -31,19 +26,10 @@ async function main() {
     return console.error("[ERROR] 获取RSS列表失败: ", error);
   }
 
-  try {
-    const frontList = await getCategoriesList(categories, token);
-    freeList = filterCategoriesListByDiscount(frontList, "FREE");
+  // 过滤出免费的种子列表
+  const allResourceId = rssItems.map((item) => item.guid[0]._);
+  const freeListIds = await getFreeId(allResourceId, token);
 
-    console.log("[2/5] 免费种子列表");
-    freeList.forEach((item) => {
-      console.log("id: %s title: %s", item.id, item.name);
-    });
-  } catch (error) {
-    return console.error("[ERROR] 获取免费种子列表失败: ", error);
-  }
-
-  const freeListIds = freeList.map((item) => item.id);
   const freeRSSItems = rssItems.filter(
     (item) =>
       freeListIds.includes(item.guid[0]._) &&

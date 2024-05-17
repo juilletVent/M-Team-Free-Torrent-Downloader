@@ -16,10 +16,8 @@
 {
   // RSS 订阅地址
   "rssURL": "你的RSS地址",
-  // 网站Authorization身份牌
-  "token": "你的网站Authorization",
-  // 需要订阅的分类，通过查看网站的列表接口获取
-  "categories": ["441"],
+  // 网站ApiToken身份牌
+  "token": "你的网站ApiToken",
   // 保存种子文件的目录，绝对路径
   "savePath": "C:\\Users\\Administrator\\Desktop\\A",
   // "savePath": "/usr/local/torrent",

@@ -1,7 +1,6 @@
 {
-  "rssURL": "你的RSS地址",
-  "token": "网站Authorization身份牌，查看网站的接口调用Request Headers 的 Authorization 字段值，复制进来即可，不要有多余的空格",
-  "categories": ["441"],
+  "rssURL": "RSS订阅链接",
+  "token": "ApiToken",
   "savePath": "C:\\Users\\Administrator\\Desktop\\A",
-  "freshTime": 1296000
+  "freshTime": 7200
 }

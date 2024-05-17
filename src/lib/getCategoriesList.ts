@@ -1,10 +1,7 @@
 import Axios from "axios";
 import { CategoriesData } from "../types/Categories";
 
-export async function getCategoriesList(
-  categories: string[],
-  authorization: string
-) {
+export async function getCategoriesList(categories: string[], token: string) {
   const { data } = await Axios.post(
     "https://api.m-team.cc/api/torrent/search",
     {
@@ -16,7 +13,7 @@ export async function getCategoriesList(
     },
     {
       headers: {
-        Authorization: authorization,
+        "x-api-key": token,
       },
     }
   );
