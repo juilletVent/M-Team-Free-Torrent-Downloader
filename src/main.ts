@@ -8,7 +8,7 @@ import { Config } from "./types/Config";
 import { getFreeId } from "./lib/getFreeId";
 
 const config = require("../config.json") as Config;
-const { rssURL, token, savePath, freshTime } = config;
+const { rssURL, token, savePath, freshTime, minSize } = config;
 
 async function main() {
   let rssItems: RSSItem[];
@@ -28,7 +28,7 @@ async function main() {
 
   // 过滤出免费的种子列表
   const allResourceId = rssItems.map((item) => item.guid[0]._);
-  const freeListIds = await getFreeId(allResourceId, token);
+  const freeListIds = await getFreeId(allResourceId, token, minSize);
 
   const freeRSSItems = rssItems.filter(
     (item) =>

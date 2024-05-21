@@ -22,7 +22,9 @@
   "savePath": "C:\\Users\\Administrator\\Desktop\\A",
   // "savePath": "/usr/local/torrent",
   // 新鲜时间（单位：秒，此处为两小时，两个小时内发布的免费种子，就下载，超过的就不下载，自行修改）
-  "freshTime": 7200
+  "freshTime": 7200,
+  // 种子最小大小（单位：Byte，此处样例为：200GB），小于此大小的种子不下载
+  "minSize": 214748364800
 }
 ```
 

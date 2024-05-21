@@ -3,4 +3,5 @@ export type Config = {
   token: string;
   savePath: string;
   freshTime: number;
+  minSize: number;
 };

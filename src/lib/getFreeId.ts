@@ -5,7 +5,11 @@ import moment from "moment";
 import _ from "lodash";
 import { DetailInfoI, DetailResponse } from "../types/DetailInfo";
 
-export async function getFreeId(idList: string[], token: string) {
+export async function getFreeId(
+  idList: string[],
+  token: string,
+  minSize: number
+) {
   const result: DetailInfoI[] = [];
 
   try {
@@ -38,7 +42,11 @@ export async function getFreeId(idList: string[], token: string) {
           response.data.data.status.discount,
           response.data.data.smallDescr
         );
-        result.push(response.data.data);
+
+        // 符合大小要求的种子
+        if (+response.data.data.size >= minSize) {
+          result.push(response.data.data);
+        }
       } else {
         console.error("[ERROR] 获取种子信息失败: ", response.data);
       }

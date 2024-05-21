@@ -2,5 +2,6 @@
   "rssURL": "RSS订阅链接",
   "token": "ApiToken",
   "savePath": "C:\\Users\\Administrator\\Desktop\\A",
-  "freshTime": 7200
+  "freshTime": 7200,
+  "minSize": 214748364800
 }
